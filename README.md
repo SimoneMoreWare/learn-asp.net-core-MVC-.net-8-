@@ -42,3 +42,23 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 For create .net project firsly you open window in VS code. In explorer page click "Create .net project". Now the search bar is enabled and in this case you digit the "MVC" and in this moment apper "asp.net core mvc App..." and you click this entry.
 As a result, you chose the folder project and afterwards you can set the name project. In this moment there are a lot of files, but for the first project you can click "Program.cs". You execute the program without debbuger. The consequence is the opening of the broswer and on display will apper this.
 ![welcomeImg](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/welcome.png)
+The file with extension .csproj contains this:
+```
+xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+```
+These parameters are found within an ASP.NET Core project file (likely a .csproj file) and define some key settings of the project.
+* <Project Sdk="Microsoft.NET.Sdk.Web">: This line specifies which SDK is used to build the project. In this case, the Microsoft.NET.Sdk.Web SDK is used, which is specific for ASP.NET Core web application development.
+* <PropertyGroup>: This is an XML element containing a group of project properties. Within this element, project settings are specified.
+* <TargetFramework>net8.0</TargetFramework>: This indicates the target framework version for the project. In this specific case, the project targets the .NET 8.0 framework. This framework defines the available APIs and libraries for the application.
+* <Nullable>enable</Nullable>: This setting enables support for nullable reference types in the project. This allows the compiler to detect and report potential null reference issues during compilation.
+* <ImplicitUsings>enable</ImplicitUsings>: This enables implicit namespace usage within the project. This means that common namespaces such as System, System.Collections.Generic, etc., do not need to be explicitly specified. The compiler will include them automatically.
+
