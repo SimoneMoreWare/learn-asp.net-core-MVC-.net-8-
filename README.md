@@ -18,6 +18,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Tools Needed](#Tools-Needed)
 * [Welcome project](#Welcome-project)
 * [MVC Architecture](#MVC-Architecture)
+* [Routing](#Routing)
+* [HomeController.cs](#HomeController.cs)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -207,7 +209,7 @@ There are two sections:
 * The `UseStaticFiles()` method configures the middleware that returns the static files from the wwwroot folder only.
 * The `UseRouting()` method refers to the concept of route. A route is a URL pattern that has been mapped to a handler. The handler is typically a Razor page, an action method in an MVC controller, or a middleware. ASP.NET Core routing allows you to control the URLs used by the app.
 * The `UseAuthorization()` middleware is responsible for handling authorization logic for incoming requests in the ASP.NET Core application, determining whether users have the necessary permissions to access protected resources.
-* The MapControllerRoute() defines the default route pattern that specifies which controller, action, and optional route parameters should be used to handle incoming requests.
+* The MapControllerRoute() defines the default route pattern that specifies which controller, action, and optional route parameters should be used to handle incoming requests. The ? indicates that a parameter can be defined.
 * Finally, `app.Run()` method runs the application and starts listening to the incoming request. It turns a console application into an MVC application based on the provided configuration.
 
 Here there are additional information: https://learn.microsoft.com/it-it/aspnet/core/fundamentals/?view=aspnetcore-8.0&tabs=windows#programcs[https://learn.microsoft.com/it-it/aspnet/core/fundamentals/?view=aspnetcore-8.0&tabs=windows#programcs]
@@ -225,6 +227,49 @@ The MVC architecture is divided into three parts:
 * Controller
   * Handles the user request and acts as an interface between Model and View.
   * For example, when the user clicks the button the request will first go to the controller. In this case, the controller will then determine what model it has to fetch it will retrieve all the data that is needed using models. As a result, all data is to be displayed in the view component. This component adds all data to its HTML. Besides, the view controller passes data to the controller. Finally, the controller will send a response back to the user, which is visible on the screen.
+  * Is the heart of the application.
+  * It has many action methods. These methods define the endpoints in a controller
 
 ![imageMVCArchitecture](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/MVCarchitecture.png)
 
+## Routing
+The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
+
+## HomeController.cs
+The code of HomeController.cs is:
+```
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using BulkyWeb.Models;
+
+namespace BulkyWeb.Controllers;
+
+public class HomeController : Controller
+{
+    private readonly ILogger<HomeController> _logger;
+
+    //constructor for class
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
+    //from here there are action methods
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
+```
+In this specific case, there are three action methods. For example, when I digit https://localhost:55555/index I will call the Index() method action, which returns the View(). What does it mean? This method returns some views inside the 'views' folder, but how does the 'views' folder choose the HTML file if in the method there aren't parameters? In this case, the default parameter is the name of the action method that calls the View() function. In addition, the file is selected from the folder with the name in [name]Controller.cs.
