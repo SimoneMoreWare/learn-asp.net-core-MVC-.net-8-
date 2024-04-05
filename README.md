@@ -17,6 +17,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Prerequisites](#Prerequisites)
 * [Tools Needed](#Tools-Needed)
 * [Welcome project](#Welcome-project)
+* [MVC Architecture](#MVC-Architecture)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -196,21 +197,32 @@ There are two sections:
 * add some services to our container
 * configuration of the http request pipeline
 
-* The first line creates an object of WebApplicationBuilder with preconfigured defaults using the CreateBuilder() method. The CreateBuilder() method setup the internal web server which is Kestrel. It also specifies the content root and read application settings file appsettings.json. Using this builder object, you can configure various things for your web application, such as dependency injection, middleware, and hosting environment. You can pass additional configurations at runtime based on the runtime parameters.
+* The first line creates an object of WebApplicationBuilder with preconfigured defaults using the CreateBuilder() method. The CreateBuilder() method setup the internal web server which is Kestrel. It also specifies the content root and reads the application settings file appsettings.json. Using this builder object, you can configure various things for your web application, such as dependency injection, middleware, and hosting environment. You can pass additional configurations at runtime based on the runtime parameters.
 * The builder object has the Services() method which can be used to add services to the dependency injection container.
-* The AddControllersWithViews() is an extension method that register types needed for MVC application (model, view, controller) to the dependency injection. It includes all the necessary services and configurations for MVC So that your application can use MVC architecture.
+* The AddControllersWithViews() is an extension method that registers types needed for MVC application (model, view, controller) to the dependency injection. It includes all the necessary services and configurations for MVC So that your application can use MVC architecture.
 * The builder.Build() method returns the object of WebApplication using which you can configure the request pipeline using middleware and hosting environment that manages the execution of your web application.
 * Now, using this WebApplication object app, you can configure an application based on the environment it runs on e.g. development, staging or production. The following adds the middleware that will catch the exceptions, logs them, and reset and execute the request path to '"/home/error" if the application runs on the development environment.
 * Note that the method starts with "Use" word means it configures the middleware. The following configures the static files, routing, and authorization middleware respectively.
-* The `UseHttpsRedirection()` method configure middleware to redirect HTTP requests to HTTPS 
+* The `UseHttpsRedirection()` method configures middleware to redirect HTTP requests to HTTPS 
 * The `UseStaticFiles()` method configures the middleware that returns the static files from the wwwroot folder only.
-* The `UseRouting()` method refer to concept of route. A route is a URL pattern that has been mapped to a handler. The handler is typically a Razor page, an action method in an MVC controller, or a middleware. ASP.NET Core routing allows you to control the URLs used by the app.
+* The `UseRouting()` method refers to the concept of route. A route is a URL pattern that has been mapped to a handler. The handler is typically a Razor page, an action method in an MVC controller, or a middleware. ASP.NET Core routing allows you to control the URLs used by the app.
 * The `UseAuthorization()` middleware is responsible for handling authorization logic for incoming requests in the ASP.NET Core application, determining whether users have the necessary permissions to access protected resources.
 * The MapControllerRoute() defines the default route pattern that specifies which controller, action, and optional route parameters should be used to handle incoming requests.
-* Finally, `app.Run()` method runs the application,start listening the incomming request. It turns a console application into an MVC application based on the provided configuration.
+* Finally, `app.Run()` method runs the application and starts listening to the incoming request. It turns a console application into an MVC application based on the provided configuration.
 
 Here there are additional information: https://learn.microsoft.com/it-it/aspnet/core/fundamentals/?view=aspnetcore-8.0&tabs=windows#programcs[https://learn.microsoft.com/it-it/aspnet/core/fundamentals/?view=aspnetcore-8.0&tabs=windows#programcs]
 
-### Controllers, MOdels and Views folder
-They define the MVC keyword
+### Controllers, Models, and Views folder
+They define the MVC keyword. You remember that MVC stands for model views and controller, but how do all three of them come together?
+
+## MVC Architecture
+The MVC architecture is divided into three parts:
+* Model
+  * Represents the shape of the data 
+* View
+  * Represents the user interface
+  * This is control the HTML element of your web project
+* Controller
+  * Handles the user request and acts as an interface between Model and View.
+  * For example, when the user clicks the button the request will first go to the controller. In this case, the controller will then determine what model it has to fetch it will retrieve all the data that is needed using models. As a result, all data is to be displayed in the view component. This component adds all data to its HTML. Besides, the view controller passes data to the controller. Finally, the controller will send a response back to the user, which is visible on the screen.
 
