@@ -14,7 +14,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 # Notes
 ## Topic
 * [Fundamentals of ASP.NET Core](#Fundamentals-of-ASP.NET-Core)
-* [Prerquisites](#Prerquisites)
+* [Prerequisites](#Prerequisites)
+* [Tools Needed](#Tools-Needed)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -29,6 +30,10 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * easy updates
 * cloud friendly
 * perfomance
-## Prerquisites
+## Prerequisites
 * C# Basics
 * SQL Basics 
+## Tools Needed
+* [Install .net8](#https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+* Visual Studio Code
+* SSMS 2018 (for database and sql server and managment)
