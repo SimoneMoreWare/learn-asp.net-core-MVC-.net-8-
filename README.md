@@ -44,7 +44,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 ## Tools Needed
 * [Install .net8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 * Visual Studio Code
-* SSMS 2018 (for database and sql server and management)
+* [SSMS (for database and sql server and management)](https://learn.microsoft.com/it-it/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms)
+  * [How to create localdb](https://www.youtube.com/watch?v=_12OOgKzi7I) 
 ## Welcome project
 ### Create a project and execute it
 To create .net project firstly you open a window in VS code. In the explorer page click "Create .net project". Now the search bar is enabled and in this case, you digit the "MVC" and at this moment appear "asp.net core mvc App..." and you click this entry.
@@ -61,7 +62,11 @@ xml
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0"/>
+  </ItemGroup>
 </Project>
 ```
 These parameters are found within an ASP.NET Core project file (likely a .csproj file) and define some key settings of the project.
@@ -70,6 +75,7 @@ These parameters are found within an ASP.NET Core project file (likely a .csproj
 * `<TargetFramework>net8.0</TargetFramework>`: This indicates the target framework version for the project. In this specific case, the project targets the .NET 8.0 framework. This framework defines the available APIs and libraries for the application.
 * `<Nullable>enable</Nullable>`: This setting enables support for nullable reference types in the project. This allows the compiler to detect and report potential null reference issues during compilation.
 * `<ImplicitUsings>enable</ImplicitUsings>`: This enables implicit namespace usage within the project. This means that common namespaces such as System, System.Collections.Generic, etc., do not need to be explicitly specified. The compiler will include them automatically.
+* Inside the ItemGroup there are packages that the application uses. 
 ### launchSettings.json
 On the other hand,  launchSettings.json contains
 ```
@@ -259,6 +265,8 @@ public class HomeController : Controller
 }
 ```
 In this specific case, there are three action methods. For example, when I digit https://localhost:55555/index I will call the Index() method action, which returns the View(). What does it mean? This method returns some views inside the 'views' folder, but how does the 'views' folder choose the HTML file if in the method there aren't parameters? In this case, the default parameter is the name of the action method that calls the View() function. In addition, the file is selected from the folder with the name in [name]Controller.cs.
+
+The return type "IActionResult" defines a contract that represents the result of an action method. In short, IActionResult is a common return type used in controller action methods in ASP.NET Core MVC to return the result of an operation to the client. Being an interface, it allows great flexibility in the type of result that can be returned.
 
 ![HomeControllerCsWorkflow](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/HomeControllerCsWorkflow.png)
 
