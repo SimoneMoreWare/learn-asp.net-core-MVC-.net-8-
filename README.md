@@ -8,6 +8,10 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
 * https://learn.microsoft.com/it-it/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
 
+# Sites
+* https://dotnettutorials.net/lesson/viewimports-in-asp-net-core-mvc/#google_vignette
+* https://www.tutorialsteacher.com/core/aspnet-core-program
+
 # Project Resources
 * https://github.com/bhrugen/Bulky_MVC/tree/15a896555835fae1482fb1536e549dc132c92249
 
@@ -217,25 +221,7 @@ Here there are additional information: https://learn.microsoft.com/it-it/aspnet/
 ### Controllers, Models, and Views folder
 They define the MVC keyword. You remember that MVC stands for model views and controller, but how do all three of them come together?
 
-## MVC Architecture
-The MVC architecture is divided into three parts:
-* Model
-  * Represents the shape of the data 
-* View
-  * Represents the user interface
-  * This is control the HTML element of your web project
-* Controller
-  * Handles the user request and acts as an interface between Model and View.
-  * For example, when the user clicks the button the request will first go to the controller. In this case, the controller will then determine what model it has to fetch it will retrieve all the data that is needed using models. As a result, all data is to be displayed in the view component. This component adds all data to its HTML. Besides, the view controller passes data to the controller. Finally, the controller will send a response back to the user, which is visible on the screen.
-  * Is the heart of the application.
-  * It has many action methods. These methods define the endpoints in a controller
-
-![imageMVCArchitecture](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/MVCarchitecture.png)
-
-## Routing
-The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
-
-## HomeController.cs
+### HomeController.cs
 The code of HomeController.cs is:
 ```
 using System.Diagnostics;
@@ -275,3 +261,36 @@ public class HomeController : Controller
 In this specific case, there are three action methods. For example, when I digit https://localhost:55555/index I will call the Index() method action, which returns the View(). What does it mean? This method returns some views inside the 'views' folder, but how does the 'views' folder choose the HTML file if in the method there aren't parameters? In this case, the default parameter is the name of the action method that calls the View() function. In addition, the file is selected from the folder with the name in [name]Controller.cs.
 
 ![HomeControllerCsWorkflow](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/HomeControllerCsWorkflow.png)
+
+### How to display the footer and the menu on the index page?
+The solution is found in the "views" folder, in particular in the "shared" folder, the "_ViewImports.cshtml" file, and the "_viewStart.cshtml" file. Firstly, there are the master page and child. The master page is identified by underscore ( _ ). The child is identified without underscore. On the master page, is the RenderBody(), which returns the controller's HTML code. In addition, in "_Layout.cshtml" there are declarations of scripts and CSS styles, used globally in the app.  
+The "_ValidationScriptsPartial.cshtml" is specifically designed to include the scripts required for model validation in forms. Model validation is a central feature in many web applications, and including the related scripts in _ValidationScriptsPartial.cshtml makes it easier to maintain and manage this part of the code separately from other functionalities of the application. Including model validation scripts here ensures that they are available on all pages where they are needed. In contrast, in the "_Layout.cshtml" there are basic Javascript scripts. The underscore (_) in "_ValidationScriptsPartial.cshtml" doesn't have a specific meaning in terms of ASP.NET syntax or naming conventions. However, commonly, the underscore is used as a prefix in file names to indicate that the file is a "partial view". A partial view in ASP.NET MVC is a type of view that can be embedded within other views or layouts. It's typically used to reuse common user interface components or to organize code in a modular and maintainable way. So, "_ValidationScriptsPartial.cshtml" could be understood as a partial view that contains the scripts necessary for model validation in forms.
+
+The `_ViewStart.cshtml` file in ASP.NET Core MVC is used to define basic settings for views within a specific directory (and optionally its subdirectories). Its content is usually very brief and simple.
+
+`_ViewImports.cshtml` is a feature in ASP.NET Core MVC that enables you to add common namespaces, directives, and other elements to multiple views within your application without having to add these namespaces, directives, and other elements to every individual view file. It essentially serves as a way to include common code that should be available to all views in the same directory or in directories. The _ViewImports.cshtml file works similarly to how web.config or app.config files work for configuration settings, specifically Razor views. The directives that can typically be placed in _ViewImports.cshtml are as follows:
+
+* @using: The @using directive is used to include the common namespaces globally so that you don’t have to include the namespaces in each and every view page.
+* @inject: The @inject directives specify a way to inject services from the dependency injection container directly into the view. So, it supports Dependency Injection in a Razor view.
+* @model: The @model directive is used to specify the Model for your view. 
+* @addTagHelper: Allows you to add Tag Helpers to all views. Tag Helpers enable server-side code to participate in creating and rendering HTML elements in Razor files.
+* @removeTagHelper: Removes a previously added Tag Helper from the available set.
+* @tagHelperPrefix: Sets a prefix that must be used for Tag Helper attributes. This can help to clarify which attributes are intended for server-side processing.
+
+## MVC Architecture
+The MVC architecture is divided into three parts:
+* Model
+  * Represents the shape of the data 
+* View
+  * Represents the user interface
+  * This is control the HTML element of your web project
+* Controller
+  * Handles the user request and acts as an interface between Model and View.
+  * For example, when the user clicks the button the request will first go to the controller. In this case, the controller will then determine what model it has to fetch it will retrieve all the data that is needed using models. As a result, all data is to be displayed in the view component. This component adds all data to its HTML. Besides, the view controller passes data to the controller. Finally, the controller will send a response back to the user, which is visible on the screen.
+  * Is the heart of the application.
+  * It has many action methods. These methods define the endpoints in a controller
+
+![imageMVCArchitecture](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/MVCarchitecture.png)
+
+## Routing
+The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
