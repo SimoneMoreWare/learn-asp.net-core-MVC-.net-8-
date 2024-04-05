@@ -62,8 +62,9 @@ These parameters are found within an ASP.NET Core project file (likely a .csproj
 * `<Nullable>enable</Nullable>`: This setting enables support for nullable reference types in the project. This allows the compiler to detect and report potential null reference issues during compilation.
 * `<ImplicitUsings>enable</ImplicitUsings>`: This enables implicit namespace usage within the project. This means that common namespaces such as System, System.Collections.Generic, etc., do not need to be explicitly specified. The compiler will include them automatically.
 
-On the other hand,  launchSettings.json contains:
-```json
+On the other hand,  launchSettings.json contains
+```
+json
 {
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
@@ -102,10 +103,10 @@ On the other hand,  launchSettings.json contains:
     }
   }
 }
+```
 This block of code represents the launchSettings.json file used in ASP.NET Core projects to configure application startup settings. Here's an explanation:
 
 The $schema line specifies the JSON schema used for the configuration file. In this case, the file follows the schema defined at the specified URL.
 The iisSettings section defines specific settings for IIS Express, a local web server used for development. It specifies whether Windows authentication is disabled, anonymous authentication is enabled, and provides details about the application URL and SSL port.
 The profiles section defines various launch profiles for the application. It includes profiles for launching with HTTP and HTTPS, as well as using IIS Express. Each profile has different settings such as the command name, whether to show dotnet run messages, whether to automatically open the browser, the application URL, and environment variables.
 The last part is an example profile for launching using IIS Express. It specifies the command to execute, whether to automatically launch the browser, and environment variables to set, such as the ASP.NET Core environment.
-```
