@@ -41,3 +41,4 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 ## Welcome project
 For create .net project firsly you open window in VS code. In explorer page click "Create .net project". Now the search bar is enabled and in this case you digit the "MVC" and in this moment apper "asp.net core mvc App..." and you click this entry.
 As a result, you chose the folder project and afterwards you can set the name project. In this moment there are a lot of files, but for the first project you can click "Program.cs". You execute the program without debbuger. The consequence is the opening of the broswer and on display will apper this.
+![welcomeImg](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/Screenshot%202024-04-05%20100228.png)
