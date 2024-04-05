@@ -132,7 +132,23 @@ Here’s what each section typically means:
 * Logging: Defines the logging level for different components of the application.
 * AllowedHosts: Specifies the hosts that the application will listen to.
 * MyCustomSettings: A custom section that you define for your own application settings.
-* Configuration Sections: The file is typically divided into sections that represent different aspects of the application settings. For example, you might have sections like ConnectionStrings, Logging, or custom sections for your application-specific settings.
+
+Here is an example: 
+```
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "MyCustomKey": "MyCustomKey Value coming from appsettings.json"
+}
+```
+
+Configuration Sections: The file is typically divided into sections that represent different aspects of the application settings. For example, you might have sections like ConnectionStrings, Logging, or custom sections for your application-specific settings.
 
 Security Consideration: It’s important not to store sensitive information, like passwords or secret keys, directly in appsettings.json. Instead, use secure storage like environment variables, Azure Key Vault, or other secure configuration providers.
 
