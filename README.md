@@ -20,7 +20,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * DataTable / Toastr / File Uploads / RichText Editor
 * Razor Pages
 * ERROR SOLVING
-## Fundamentals of ASP.NET Core  {#fundamentals-of-asp-net-core}
+## Fundamentals of ASP.NET Core {#fundamentals-of-asp-net-core}
 * Fast
 * Open Source
 * Cross platform
