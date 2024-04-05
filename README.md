@@ -8,6 +8,9 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
 * https://learn.microsoft.com/it-it/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
 
+# Project Resources
+* https://github.com/bhrugen/Bulky_MVC/tree/15a896555835fae1482fb1536e549dc132c92249
+
 # Notes
 ## Topic
 * [Fundamentals of ASP.NET Core](#fundamentals-of-asp-net-core)
@@ -17,5 +20,11 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * DataTable / Toastr / File Uploads / RichText Editor
 * Razor Pages
 * ERROR SOLVING
-## Fundamentals of ASP.NET Core
-ciao
+## Fundamentals of ASP.NET Core  {#fundamentals-of-asp-net-core}
+* Fast
+* Open Source
+* Cross platform
+* Built in dependency injection
+* easy updates
+* cloud friendly
+* perfomance 
