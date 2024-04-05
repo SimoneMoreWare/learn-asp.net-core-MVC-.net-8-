@@ -56,9 +56,9 @@ xml
 </Project>
 ```
 These parameters are found within an ASP.NET Core project file (likely a .csproj file) and define some key settings of the project.
-* <Project Sdk="Microsoft.NET.Sdk.Web">: This line specifies which SDK is used to build the project. In this case, the Microsoft.NET.Sdk.Web SDK is used, which is specific for ASP.NET Core web application development.
-* <PropertyGroup>: This is an XML element containing a group of project properties. Within this element, project settings are specified.
-* <TargetFramework>net8.0</TargetFramework>: This indicates the target framework version for the project. In this specific case, the project targets the .NET 8.0 framework. This framework defines the available APIs and libraries for the application.
-* <Nullable>enable</Nullable>: This setting enables support for nullable reference types in the project. This allows the compiler to detect and report potential null reference issues during compilation.
-* <ImplicitUsings>enable</ImplicitUsings>: This enables implicit namespace usage within the project. This means that common namespaces such as System, System.Collections.Generic, etc., do not need to be explicitly specified. The compiler will include them automatically.
+* `<Project Sdk="Microsoft.NET.Sdk.Web">`: This line specifies which SDK is used to build the project. In this case, the Microsoft.NET.Sdk.Web SDK is used, which is specific for ASP.NET Core web application development.
+* `<PropertyGroup>`: This is an XML element containing a group of project properties. Within this element, project settings are specified.
+* `<TargetFramework>net8.0</TargetFramework>`: This indicates the target framework version for the project. In this specific case, the project targets the .NET 8.0 framework. This framework defines the available APIs and libraries for the application.
+* `<Nullable>enable</Nullable>`: This setting enables support for nullable reference types in the project. This allows the compiler to detect and report potential null reference issues during compilation.
+* `<ImplicitUsings>enable</ImplicitUsings>`: This enables implicit namespace usage within the project. This means that common namespaces such as System, System.Collections.Generic, etc., do not need to be explicitly specified. The compiler will include them automatically.
 
