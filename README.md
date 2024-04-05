@@ -14,6 +14,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 # Notes
 ## Topic
 * [Fundamentals of ASP.NET Core](#Fundamentals-of-ASP.NET-Core)
+* [Prerquisites](#Prerquisites)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -27,4 +28,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * Built in dependency injection
 * easy updates
 * cloud friendly
-* perfomance 
+* perfomance
+## Prerquisites
+* C# Basics
+* SQL Basics 
