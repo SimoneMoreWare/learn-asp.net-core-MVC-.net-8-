@@ -34,6 +34,6 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * C# Basics
 * SQL Basics 
 ## Tools Needed
-* [Install .net8](#https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+* [Install .net8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 * Visual Studio Code
 * SSMS 2018 (for database and sql server and managment)
