@@ -13,14 +13,14 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 
 # Notes
 ## Topic
-* [Fundamentals of ASP.NET Core](# fundamentals-of-asp-net-core)
+* [Fundamentals of ASP.NET Core](#fundamentals-of-asp-net-core)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
 * DataTable / Toastr / File Uploads / RichText Editor
 * Razor Pages
 * ERROR SOLVING
-## Fundamentals of ASP.NET Core {# fundamentals-of-asp-net-core}
+## Fundamentals of ASP.NET Core 
 * Fast
 * Open Source
 * Cross platform
