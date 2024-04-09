@@ -25,6 +25,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Routing](#Routing)
 * [HomeController.cs](#HomeController.cs)
 * [Database](#Database)
+* [Design](#Design)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -500,3 +501,162 @@ foreach(var obj in Model): This foreach loop iterates through each Category obje
 @obj.Name and @obj.DisplayOrder: Within the loop, @obj.Name and @obj.DisplayOrder are Razor syntax used to access properties of the current Category object (obj). This syntax is used to directly output the value of the corresponding properties (Name and DisplayOrder) of each Category object in the table row (<tr>).
 
 Razor syntax (@) allows you to seamlessly mix C# code with HTML markup in Razor views. When you use @obj.Name, it's essentially calling the getter method for the Name property of the Category object (obj). This is a convenient way to access and display properties of objects passed to the view from the controller.
+
+### Add category with button
+
+You should be follow these step:
+* Create an action method that will be invoked in the CategoryController.cs
+* Call the view (or RedirectToAction?) though action
+
+Here there is the create category page:
+```
+@model Category
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Category</h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Name" class="p-0"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="DisplayOrder" class="p-0"></label>
+            <input asp-for="DisplayOrder" class="form-control" />
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border  form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+```
+Input fields are linked to parameters of the category class. For this scope, you should be used inside the input field "asp-for=${parameter}"
+
+Here's how it works:
+
+1. **Data Binding:** When a form is submitted to the page, the values of the input controls inside the form need to be sent to the server. `asp-for` helps create this association between the field of the model object and the HTML input control. When the page is rendered, the value of the model object is automatically used to populate the field of the input element.
+
+2. **Maintaining Data Binding:** During the postback of the page, such as when a form is submitted, ASP.NET Core uses the values sent in the body of the HTTP request to automatically update the corresponding data model. By using `asp-for`, input controls can be directly associated with members of the data model, simplifying the process of retrieving values during postback.
+
+However, you create a new method action in the CategoryController.
+
+[HttpPost]
+public IActionResult Create(Category obj)
+{
+	_db.Categories.Add(obj);
+	_db.SaveChanges();
+	return RedirectToAction("Index");
+}
+
+Attribute Declaration:
+
+[HttpPost]: This attribute specifies that the action method Create should only respond to HTTP POST requests. In ASP.NET Core MVC, actions can be decorated with attributes to define the type of HTTP request they handle.
+Action Method Declaration:
+
+public IActionResult Create(Category obj): This declares the action method Create, which takes a parameter obj of type Category. The Category class represents a category object in the application.
+Data Processing:
+
+_db.Categories.Add(obj);: This line adds the Category object obj to the database context _db. The _db represents an instance of the ApplicationDbContext class, which is used for interacting with the application's database.
+Database Save:
+
+_db.SaveChanges();: This line saves the changes made to the database context. In this case, it commits the addition of the new category object to the database. This method call persists changes to the underlying database.
+Redirection:
+
+return RedirectToAction("Index");: After successfully adding the category to the database, the action method redirects the user to the Index action of the same controller. RedirectToAction is a method provided by ASP.NET Core MVC for redirecting to another action within the same controller or a different controller.
+
+### Add Validation
+
+Add validation in asp.net core mvc .net 8 is a piece of cake. In the class Category.cs write this snippet:
+
+```
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace BulkyWeb.Models
+{
+    public class Category
+    {
+        //here we will create multiple properties, which are the columns that we want in category table 
+        [Key]
+        public int CategoryId { get; set; } //primary key of the table 
+        [Required]
+        [MaxLength(30)] 
+        [DisplayName("Category Name")]
+        public required string Name { get; set; }
+        [DisplayName("Display Order")]
+        [Range(1,100,ErrorMessage = "You're a dumb")]
+        public int DisplayOrder { get; set; }
+    }
+}
+```
+
+However, implement custom validation on the create page you must be edit the action method in the controller.
+```
+[HttpPost]
+public IActionResult Create(Category obj)
+{
+    if (ModelState.IsValid) { 
+	    _db.Categories.Add(obj);
+	    _db.SaveChanges();
+            return RedirectToAction("Index");
+	}
+    return View();
+}
+```
+The (ModelState.IsValid) condition is commonly used in ASP.NET Core MVC controller actions to check whether the model passed to the action is valid based on the validation rules defined in the model class. Let's break down what it does:
+
+* ModelState: ModelState is a property of the controller class in ASP.NET Core MVC that represents the state of model binding and validation. It contains information about the state of each property of the model being bound.
+* IsValid: The IsValid property is a boolean property of the ModelState object. It indicates whether the model state is valid or not based on the validation rules defined for the properties of the model.
+* Usage: (ModelState.IsValid) is typically used within controller actions to perform conditional logic based on the validity of the model. If the model state is valid, meaning that all the validation rules defined for the properties of the model have been satisfied, then the condition (ModelState.IsValid) evaluates to true. Otherwise, it evaluates to false.
+
+How to implement error in the create page? You add 
+`<span asp-validation-for="${nameParameter" class="text-danger"></span>`
+
+if you want to add a specific message error when the specific event happened you should use it to
+```
+if (obj.Name == obj.DisplayOrder.ToString())
+{
+    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
+}
+```
+`AddModelError` is a method used in the controller of an ASP.NET Core MVC application to add a model error to the `ModelState`. This method is useful when you want to customize validation errors and add a specific error message for a particular model property.
+
+Here's what `AddModelError` is used for and how it's used:
+
+1. **Customizing validation errors**: When validating a model in the controller, validation errors may occur, such as if a required field has not been filled in correctly. In these cases, you can use `AddModelError` to add a custom error message for a specific model property.
+
+2. **Custom error messages**: `AddModelError` allows you to specify a custom error message to be displayed for a specific model property. This can be useful for providing users with more detailed information about what went wrong during model validation.
+
+
+The <div asp-validation-summary="All"></div> tag in an ASP.NET Core MVC Razor view is used to display a summary of model validation errors.
+
+The validation summary will typically display a list of error messages for each invalid field in the model. The exact format and style of the summary may depend on the CSS styles applied to it.
+
+The "All" option specified in asp-validation-summary="All" ensures that all validation errors are included in the summary, regardless of which fields they are associated with.
+
+There are only three valid values for the asp-validation-summary attribute in ASP.NET Core MVC Razor views:
+* "All": Displays a summary of all validation errors, including errors associated with individual properties as well as errors associated with the model as a whole.
+* "ModelOnly": Displays a summary of errors associated with the model as a whole, excluding errors associated with individual properties.
+* "None": Specifies that no validation summary should be displayed. It essentially disables the validation summary feature.
+
+## Design
+Tool: (https://bootswatch.com/)[https://bootswatch.com/]
+
+With this tool you choose a lot templates for your project. Download the bootstrap.css and put the code in bootstrap lib in the wwwroot folder (wwwroot->lib->bootstrap->bootstrap.css)
+
+Tool: (https://icons.getbootstrap.com/)[https://icons.getbootstrap.com/]
+
+Include the icon fonts stylesheet—in your website <head>  
+`<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">`
