@@ -44,12 +44,13 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * SQL Basics 
 ## Tools Needed
 * [Install .net8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-* Visual Studio Code
+* [Visual Studio Code](https://visualstudio.microsoft.com/it/vs/)
+ * Install ASP.NET pack 
 * [SSMS (for database and sql server and management)](https://learn.microsoft.com/it-it/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms)
   * [How to create localdb](https://www.youtube.com/watch?v=_12OOgKzi7I) 
 ## Welcome project
 ### Create a project and execute it
-To create .net project firstly you open a window in VS code. In the explorer page click "Create .net project". Now the search bar is enabled and in this case, you digit the "MVC" and at this moment appear "asp.net core mvc App..." and you click this entry.
+To create .net project firstly you open a window in Visual Studio 2022. In the explorer page click "Create new project". Now the search bar is enabled and in this case, you digit the "MVC" and at this moment appear "asp.net core mvc App..." and you click this entry.
 As a result, you choose the folder project and afterward, you can set the name project. At this moment there are a lot of files, but for the first project you can click "Program.cs". You execute the program without a debugger. The consequence is the opening of the browser and on display will appear.
 ![welcomeImg](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/welcome.png)
 ### file with .csproj exstension
