@@ -24,6 +24,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [MVC Architecture](#MVC-Architecture)
 * [Routing](#Routing)
 * [HomeController.cs](#HomeController.cs)
+* [Database](#Database)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -302,3 +303,17 @@ The MVC architecture is divided into three parts:
 
 ## Routing
 The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
+
+## Database
+You follow prerequisite instructions before starting with this. 
+
+At the moment to start the database, you create a connection string in appsettings.json, in particular you should follow this syntax:
+`"ConnectionStrings": { "DefaultConnection": "Server:${nameServer};Database=${nameSolution};Trusted_Connection=True;TrustServerCertificate=True" } `
+
+As a result, you should create a new folder in the project to use the database. 
+
+Entity Framework (EF) is an Object-Relational Mapping (ORM) framework developed by Microsoft to simplify data access and management in a relational database using objects. Essentially, EF allows you to work with database data using object-oriented programming (OOP) instead of writing SQL queries directly.
+
+When using EF with ASP.NET Core MVC to interact with a database, one of the main components you'll use is the DbContext. DbContext is a class provided by Entity Framework that represents the working session with the database. It coordinates read and write operations, manages transactions, and tracks changes to data within the context of the working session.
+
+To use a DbContext with Entity Framework in an ASP.NET Core MVC application, you need to define a class that derives from DbContext and includes properties representing database tables. Additionally, you can define relationships between tables and configure other mapping options between model objects and database tables.
