@@ -402,7 +402,101 @@ For instance, if you want to create a link to a specific action in a Razor view,
 
 This will generate a link that points to the Index action within the HomeController. At runtime, ASP.NET Core MVC will translate these attributes into a valid URL for the corresponding action and controller.
 
+###How to display the entries table on a page
 
+The following code snippet in "ApplicationDBContext.cs" is part of the data model configuration when using Entity Framework Core in an ASP.NET Core MVC application:
+```
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Category>().HasData(
+            new Category { CategoryId=1, Name="Action", DisplayOrder=1},
+            new Category { CategoryId=2, Name="SciFi", DisplayOrder=2},
+            new Category { CategoryId=3, Name="History", DisplayOrder=3}
+        );
+}
+```
+The HasData method is used to specify initial data to be seeded into the database for the Category entity. It allows you to populate the database with samples or initial data. In this case, it's populating the Category table with three categories: "Action", "SciFi", and "History", each with a unique CategoryId and specified display order.
 
+As a result, open NuGet terminal and you digit "add-migration Seed${nameTable}Table". Afterward, you should digit "update-database" to update the database.
 
+For showing the entries table you edit the controller and view the corresponding Category. 
+Firstly, edit the CategoryContrller with this code:
+```
+using BulkyWeb.Data;
+using BulkyWeb.Models;
+using Microsoft.AspNetCore.Mvc;
 
+namespace BulkyWeb.Controllers
+{
+    public class CategoryController : Controller
+    {
+        private readonly ApplicationDbContext _db;
+        public CategoryController(ApplicationDbContext db) 
+        { 
+            _db = db;
+        }
+        public IActionResult Index()
+        {
+            List<Category> objCategoryList = _db.Categories.ToList();
+            return View(objCategoryList);
+        }
+    }
+}
+```
+
+This code snippet represents an ASP.NET Core MVC controller to handle operations related to categories (`Category`) within a web application. Let's examine step by step what it does:
+
+1. **Namespace and using statements:**
+   - The controller is defined within the `BulkyWeb.Controllers` namespace.
+   - Some using statements are used to include necessary namespaces, such as `BulkyWeb.Data`, `BulkyWeb.Models`, and `Microsoft.AspNetCore.Mvc`.
+
+2. **Controller definition:**
+   - `CategoryController` is a class that inherits from the `Controller` class. This indicates it is a controller for operations related to categories.
+
+3. **Constructor:**
+   - A constructor is defined for the `CategoryController` that takes an object of type `ApplicationDbContext` as a parameter. This parameter is used for database access.
+
+4. **`Index()` method:**
+   - This method handles the HTTP GET request for the `/Category/Index` endpoint.
+   - Within the method, a list of `Category` objects is retrieved from the database using the `ApplicationDbContext` object saved in the `_db` variable.
+   - The list of categories is then passed to the view associated with the method and returned as the result of the request.
+
+When the objCategoryList (which is ad list of Category objects retrieved from the database) is passed as a parameter to the View() method, it's essentially being passed to the corresponding Razor view file (*.cshtml in this case). This allows the view to access and render the data within that list.
+
+In the Razor view file (*.cshtml), you can use Razor syntax to iterate through objCategoryList and display the categories in HTML.
+
+Here the index.cshtml file:
+```
+@model List<Category>
+
+<h1>Category List</h1>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>
+				Category Name
+			</th>
+			<th>
+				Display Order
+			</th>	
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var obj in Model)
+		{
+			<tr>
+				<td>@obj.Name</td>
+				<td>@obj.DisplayOrder</td>
+			</tr>
+		}
+	</tbody>
+</table>
+```
+
+@model List<Category>: This line specifies the type of model that this view expects. In this case, it's a List of Category objects.
+
+foreach(var obj in Model): This foreach loop iterates through each Category object in the Model, which is the list of categories passed from the controller. For each iteration, the current Category object is stored in the variable obj.
+
+@obj.Name and @obj.DisplayOrder: Within the loop, @obj.Name and @obj.DisplayOrder are Razor syntax used to access properties of the current Category object (obj). This syntax is used to directly output the value of the corresponding properties (Name and DisplayOrder) of each Category object in the table row (<tr>).
+
+Razor syntax (@) allows you to seamlessly mix C# code with HTML markup in Razor views. When you use @obj.Name, it's essentially calling the getter method for the Name property of the Category object (obj). This is a convenient way to access and display properties of objects passed to the view from the controller.
