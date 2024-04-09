@@ -21,10 +21,24 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Prerequisites](#Prerequisites)
 * [Tools Needed](#Tools-Needed)
 * [Welcome project](#Welcome-project)
+    * [Create a project and execute it](#Create-a-project-and execute-it)
+    * [file with .csproj exstension](#file-with-.csproj exstension)
+    * [launchSettings.json](#launchSettings.json)
+    * [wwwroot folder](#wwwroot-folder)
+    * [appsettings.json](#appsettings.json)
+    * [program.cs](#program.cs)
+    * [Controllers, Models, and Views folder](#Controllers, Models,-and-Views-folder)
+    * [HomeController.cs](#HomeController.cs)
+    * [How to display the footer and the menu on the index page?](#How-to-display-the-footer-and-the-menu-on-the-index-page?)
 * [MVC Architecture](#MVC-Architecture)
 * [Routing](#Routing)
 * [HomeController.cs](#HomeController.cs)
 * [Database](#Database)
+    * [Create a table](#Create-a-table)
+    * [Use statements](#Use-statements)
+    * [How to display the entries table on a page](#How-to-display-the-entries-table-on-a-page)
+    * [Add category with button](#Add-category-with-button)
+    * [Add Validation](#Add-Validation)
 * [Design](#Design)
 * MVC Application
 * Client and Server Validation
@@ -68,7 +82,7 @@ xml
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0"	/>
   </ItemGroup>
 </Project>
 ```
@@ -403,7 +417,7 @@ For instance, if you want to create a link to a specific action in a Razor view,
 
 This will generate a link that points to the Index action within the HomeController. At runtime, ASP.NET Core MVC will translate these attributes into a valid URL for the corresponding action and controller.
 
-###How to display the entries table on a page
+### How to display the entries table on a page
 
 The following code snippet in "ApplicationDBContext.cs" is part of the data model configuration when using Entity Framework Core in an ASP.NET Core MVC application:
 ```
@@ -640,7 +654,7 @@ Here's what `AddModelError` is used for and how it's used:
 2. **Custom error messages**: `AddModelError` allows you to specify a custom error message to be displayed for a specific model property. This can be useful for providing users with more detailed information about what went wrong during model validation.
 
 
-The <div asp-validation-summary="All"></div> tag in an ASP.NET Core MVC Razor view is used to display a summary of model validation errors.
+The `<div asp-validation-summary="All"></div>` tag in an ASP.NET Core MVC Razor view is used to display a summary of model validation errors.
 
 The validation summary will typically display a list of error messages for each invalid field in the model. The exact format and style of the summary may depend on the CSS styles applied to it.
 
