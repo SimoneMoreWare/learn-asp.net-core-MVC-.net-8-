@@ -45,7 +45,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 ## Tools Needed
 * [Install .net8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 * [Visual Studio Code](https://visualstudio.microsoft.com/it/vs/)
- * Install ASP.NET pack 
+  * Install ASP.NET pack 
 * [SSMS (for database and sql server and management)](https://learn.microsoft.com/it-it/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms)
   * [How to create localdb](https://www.youtube.com/watch?v=_12OOgKzi7I) 
 ## Welcome project
