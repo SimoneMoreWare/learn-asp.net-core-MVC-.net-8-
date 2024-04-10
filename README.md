@@ -669,7 +669,67 @@ There are only three valid values for the asp-validation-summary attribute in AS
 
 ### Edit Entry
 
-You should create a new method action called "Edit"
+You should create a new method action called "Edit". However, you should create a view edit page.
+
+There are two methods of action.
+```
+public IActionResult Edit(int? id)
+{
+    if(id==null || id == 0)
+    {
+        return NotFound();
+    }
+    Category? categoryFromDb = _db.Categories.Find(id);
+    //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+
+    if (categoryFromDb == null)
+    {
+        return NotFound();
+    }
+    return View(categoryFromDb);
+}
+[HttpPost]
+public IActionResult Edit(Category obj)
+{
+    if (ModelState.IsValid)
+    {
+        _db.Categories.Update(obj);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    return View();
+
+}
+```
+`public IActionResult Edit(int? id)`
+This method handles the GET request for editing a category in an ASP.NET Core MVC application. Here's what the main parts of the method do:
+- Checks if the `id` is valid. If the `id` is null or zero, it returns a "NotFound" result.
+- Retrieves the category from the database using the `Find()` method. It searches for the entity with the specified primary key.
+- If the category is not found in the database, it returns a "NotFound" result.
+- If the category is found, it returns the `Edit` view with the category as the model.
+- In index.cshtml used asp-route-id to pass the parameter id.
+    - asp-route-id="@obj.Id"
+    - In an ASP.NET Core MVC application, `asp-route-id="@obj.Id"` is used to generate a URL with a route parameter called "id", whose value will be taken from the "Id" property of the `obj` object.
+    - When a link is generated using `asp-route`, it creates a URL that includes the specified route parameters. In your case, `asp-route-id="@obj.Id"` means that a URL will be generated with a route parameter called "id" whose value will be the ID of the `obj` object.
+    - For example, if `obj.Id` is 1, the generated URL will be something like this:
+        - /ControllerName/ActionName?id=1
+        - This URL will be used to call a specific action in the controller with the ID as a parameter. This is useful when you want to pass data between different actions or pages within the application.
+
+`[HttpPost] public IActionResult Edit(Category obj)`
+This method handles the POST request when the category edit form is submitted. Here's what the main parts of the method do:
+- Checks if the model is valid, i.e., if the submitted data satisfies the validation rules defined in the `Category` model.
+- If the model is valid, updates the category in the database using the `Update()` method of the database context (`_db`). This method marks the entity as modified and adds it to the set of entities to be updated.
+- Calls `SaveChanges()` to actually perform the update in the database.
+- If the update is successful, redirects the user to the "Index" action of the controller, typically representing the list of categories.
+- If the model is not valid (e.g., due to validation errors), returns the `Edit` view with the category model to allow the user to correct the data.
+
+Functions Used:
+- `Find(int? id)`: Searches for an entity in the current entity set using the specified primary key. Returns the found entity or null if not found.
+- `FirstOrDefault()`: Returns the first element of a sequence or the default value of the type if the sequence is empty.
+- `Where()`: Filters a sequence of values based on a specified predicate. Returns the elements that satisfy the predicate as a sequence.
+- `Update()`: Marks an entity as modified and adds it to the set of entities to be updated in the database context.
+- `NotFound()`: Returns an HTTP "404 Not Found" result. This method is often used to indicate that a requested resource was not found on the server.
 
 ### Delete Entry
 
