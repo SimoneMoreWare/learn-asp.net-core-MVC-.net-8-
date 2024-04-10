@@ -46,12 +46,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Razor Pages](#Razor-Pages)
     * [Pages folder](#Pages-folder)
     * [Configure Entity Framework Core](#Configure-Entity-Framework-Core)
-* MVC Application
-* Client and Server Validation
-* Entity Framework Core And Repository Pattern
-* DataTable / Toastr / File Uploads / RichText Editor
-* Razor Pages
-* ERROR SOLVING
+* [N-tier architecture](#N-tier-architecture)
+* [Utilities](#Utilities)
 ## Fundamentals of ASP.NET Core 
 * Fast
 * Open Source
@@ -1150,3 +1146,21 @@ the code of create.cshtmt is:
 }
 ```
 The approach of editing, and deleting pages is the same. This is an assignment.
+
+## N-tier architecture
+
+N-tier architecture, in ASP.NET Core MVC .NET 8 environment, refers to a mode of software design and organization where the application is divided into several distinct layers or tiers, each with a specific purpose. Each tier performs well-defined functions and collaborates with others to provide functionality to the application as a whole. The main tiers of a typical N-tier architecture include:
+
+1. **Presentation Layer**: This is the topmost layer of the application, responsible for presenting the user interface to the end-user and managing user interactions. In an ASP.NET Core MVC application, this role is often performed by controllers and views.
+
+2. **Business Logic Layer**: This layer contains the business logic of the application. Business rules, data validation, and complex processing are implemented here. This layer is often also called the "service" or "service layer".
+
+3. **Data Access Layer**: This layer manages access to underlying data, such as a database or external services. It handles executing queries, updates, and persistence operations on the data. In ASP.NET Core MVC, this layer might include data models, repositories, and data access services.
+
+4. **Infrastructure Layer**: This layer provides support services and utilities for the application, such as logging, exception handling, authentication, authorization, caching, etc. This layer may also include third-party libraries or external components necessary for the application's operation.
+
+Using an N-tier architecture offers several advantages, including greater modularity, maintainability, scalability, and testability of the software. Additionally, by separating various aspects of the application into distinct layers, it becomes easier for developers to manage complexities and make changes without impacting other components of the system.
+
+## Utilities
+* https://bootswatch.com/
+* https://icons.getbootstrap.com/
