@@ -43,6 +43,9 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
     * [Delete Entry](#Delete-Entry)
     * [Display Notification on update/delete/create event](#Display-Notification-on-update/delete/create-event)
 * [Design](#Design)
+* [Razor Pages](#Razor-Pages)
+    * [Pages folder](#Pages-folder)
+    * [Configure Entity Framework Core](#Configure-Entity-Framework-Core)
 * MVC Application
 * Client and Server Validation
 * Entity Framework Core And Repository Pattern
@@ -850,3 +853,299 @@ Tool: (https://icons.getbootstrap.com/)[https://icons.getbootstrap.com/]
 
 Include the icon fonts stylesheet—in your website <head>  
 `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">`
+
+## Razor Pages
+
+**Overview:**
+Razor Pages are a feature of ASP.NET Core that allows for quickly creating web pages without the need for a separate controller. Razor Pages offer a simple and intuitive way to handle HTTP requests and generate HTML responses using a file-based model.
+
+**Simplicity:**
+Razor Pages are designed to simplify web page development, especially for CRUD (Create, Read, Update, Delete) scenarios. Each Razor Page consists of a .cshtml file that combines HTML markup and C# code.
+
+**Routing based on Page Name:**
+Razor Pages use routing based on the page name, which means the URL structure corresponds to the directory and file structure in the Razor Pages project. For example, a Razor Page named Index.cshtml located in the Pages/ directory will be accessible via the /Index URL.
+
+Difference between Razor pages and MVC
+**Code Structure and Organization:**
+
+Razor Pages: In Razor Pages, the code structure is organized around the pages themselves. Each Razor Page includes both HTML markup and page processing logic within the same .cshtml file. The page handling logic is encapsulated within a PageModel class associated with the page itself.
+
+Model-View-Controller (MVC): In MVC, the code structure is organized around three main components: Model, View, and Controller. The Model contains the business logic and application data, the View handles the presentation of the user interface, and the Controller manages user requests and coordinates actions between the Model and View.
+
+**Routing:**
+
+Razor Pages: Razor Pages use routing based on the page name. The URL structure corresponds to the directory and file structure in the Razor Pages project.
+
+Model-View-Controller (MVC): MVC uses routing based on the [Route] attribute on controller methods. URL paths are mapped to controller methods using ASP.NET Core routing conventions.
+
+**Complexity:**
+
+Razor Pages: Razor Pages are designed to simplify web page development, especially for CRUD (Create, Read, Update, Delete) scenarios. They are ideal for simpler applications or single pages that don't require a full MVC pattern.
+
+Model-View-Controller (MVC): MVC is more flexible and scalable compared to Razor Pages. It's suitable for more complex applications that require greater separation of concerns between Model, View, and Controller.
+
+**Flexibility and Customization:**
+
+Razor Pages: Razor Pages are less flexible compared to MVC but are easier to learn and use, especially for beginner developers or simpler projects.
+
+Model-View-Controller (MVC): MVC offers greater flexibility and customization. You can use filters, middleware, and other advanced ASP.NET Core features to implement more complex requirements.
+
+### Pages folder
+Contains Razor pages and supporting files. Each Razor page is a pair of files:
+
+A .cshtml file that has HTML markup with C# code using Razor syntax.
+A .cshtml.cs file that has C# code that handles page events.
+Supporting files have names that begin with an underscore. For example, the _Layout.cshtml file configures UI elements common to all pages. _Layout.cshtml sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page. For more information, see Layout in ASP.NET Core.
+
+### Configure Entity Framework Core
+
+The first step is to create a new folder called "Models". In the "Models" folder create a class Category.cs.
+
+However, you create a new connection string in the appsetting.json (read before paragraph about this).
+
+To add the nuget packages you click on the solution bar and with the right mouse button you can install new packages through nuget manager. You should remember to edit the project file. 
+
+To configure the entity framework you should create a new folder called "Data". In this folder, you create the class of ApplicationDbContext.cs.
+
+In addition, you add a configuration string to connect the database in the program.cs.
+
+Now, there are migration and creation tables.
+
+THE SNIPPET CODE IS THE SAME PREVIOUS CHAPTER (MVC) IN THIS PASSAGE.
+
+Now, create a new folder called "Categories" in the "Pages". Now, create a index.cshtml in the "categories" folder.
+
+Here is the code:
+Index.cshtml.cs
+```
+using BulkyWebRazor_Temp.Data;
+using BulkyWebRazor_Temp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace BulkyWebRazor_Temp.Pages.Categories
+{
+    public class IndexModel : PageModel
+    {
+        private readonly ApplicationDbContext _db;
+        public List<Category> CategoryList { get; set; }
+        public IndexModel(ApplicationDbContext
+            db)
+        {
+            _db = db;
+        }
+        public void OnGet()
+        {
+            CategoryList = _db.Categories.ToList();
+        }
+    }
+}
+```
+Namespaces and Dependencies:
+
+It includes necessary namespaces such as Microsoft.AspNetCore.Mvc, Microsoft.AspNetCore.Mvc.RazorPages, BulkyWebRazor_Temp.Data, and BulkyWebRazor_Temp.Models.
+It declares a dependency on ApplicationDbContext for database operations.
+PageModel Class:
+
+It defines a class named IndexModel that inherits from PageModel. In Razor Pages, each page has a corresponding PageModel class responsible for handling the page's logic.
+It declares a private readonly field _db of type ApplicationDbContext. This field will be used to access the database.
+It declares a public property CategoryList of type List<Category>. This property will hold the list of categories retrieved from the database.
+Constructor:
+
+It defines a constructor for IndexModel that accepts an instance of ApplicationDbContext (db) as a parameter.
+Inside the constructor, it assigns the provided db parameter to the private _db field, allowing the PageModel to interact with the database.
+OnGet Method:
+
+It defines an OnGet method, which is invoked when the page is requested using the HTTP GET method.
+Inside the OnGet method, it retrieves a list of categories from the database using _db.Categories.ToList().
+It assigns the retrieved list of categories to the CategoryList property, making it available for use in the associated Razor view (Index.cshtml).
+
+Invocation of the OnGet method:
+The OnGet method is invoked when the page is requested using the HTTP GET method. When a user navigates to the corresponding page (Index.cshtml in your case), the ASP.NET Core framework automatically executes the OnGet method of the IndexModel class. Within the OnGet method, operations are performed to prepare the data to be displayed on the page. For example, in your code, the OnGet method retrieves a list of categories from the database and assigns it to the CategoryList property.
+
+Prefix "On" in the action methods:
+In Razor Pages, the "On" prefix in action method names is a convention used to indicate that the method is called in response to a specific action. For example:
+
+OnGet: This method is called when the page is requested using the HTTP GET method.
+OnPost: This method is called when the page receives a form submit using the HTTP POST method.
+Other prefixes such as OnPut, OnDelete, etc., are used to handle other types of HTTP requests.
+These methods are called "action methods" because they represent the actions that the PageModel can perform in response to HTTP requests. The prefix "On" is used to distinguish these methods as specific event handlers in Razor Pages.
+
+index.cshtml
+```
+
+@page
+@model BulkyWebRazor_Temp.Pages.Categories.IndexModel
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page="Categories/Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>  Create New Category
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    Display Order
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.CategoryList.OrderBy(u => u.DisplayOrder))
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>
+                        @obj.DisplayOrder
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-page="Category/edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-page="Category/delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+```
+The asp-page attribute in ASP.NET Core Razor Pages is used to generate URLs for navigation within Razor Pages. Here's how it works:
+
+`<a asp-page="PageName">Link Text</a>`
+
+asp-page: This attribute specifies the Razor Page to navigate to. You provide the name of the Razor Page without the file extension (e.g., "PageName" instead of "PageName.cshtml").
+
+Link Text: This is the text or HTML content displayed for the link.
+
+When the Razor Page containing this link is rendered, ASP.NET Core will automatically generate the appropriate URL based on the provided Razor Page name. If the Razor Page is located within a folder, you can include the folder path in the asp-page attribute value (e.g., "FolderName/PageName").
+
+Additionally, you can include route parameters in the URL by specifying them using the asp-route-* attributes. For example:
+`<a asp-page="PageName" asp-route-id="123">Link Text</a>`
+In this case, "id" is a route parameter, and its value is set to "123". When the link is rendered, ASP.NET Core will generate a URL with the route parameter included, like /PageName?id=123.
+
+Now, you create Create.cshtml page in the same folder.
+The create.cshtml.cs code is:
+```
+using BulkyWebRazor_Temp.Data;
+using BulkyWebRazor_Temp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace BulkyWebRazor_Temp.Pages.Categories
+{
+    [BindProperties]
+    public class CreateModel : PageModel
+    {
+        private readonly ApplicationDbContext _db;
+        public Category Category { get; set; }
+        public CreateModel(ApplicationDbContext
+            db)
+        {
+            _db = db;
+        }
+        public void OnGet()
+        {
+        }
+
+        public IActionResult OnPost()
+        {
+            _db.Categories.Add(Category);
+            _db.SaveChanges();
+            return RedirectToPage("Index"); //same folder that it works
+        }
+    }
+}
+```
+
+1. **Namespace and Dependencies**:
+   - Import necessary namespaces such as `BulkyWebRazor_Temp.Data`, `BulkyWebRazor_Temp.Models`, `Microsoft.AspNetCore.Mvc`, and `Microsoft.AspNetCore.Mvc.RazorPages`.
+
+2. **PageModel Class Declaration**:
+   - Declare a class named `CreateModel` that inherits from `PageModel`. This class represents the PageModel for the Create page.
+
+3. **BindProperties Attribute**:
+   - Apply the `[BindProperties]` attribute to the `CreateModel` class. This attribute automatically binds properties of the class to the values submitted in HTTP requests.
+
+4. **Private Field and Constructor**:
+   - Declare a private readonly field `_db` of type `ApplicationDbContext`. This field is used to access the database.
+   - Define a constructor for the `CreateModel` class that accepts an instance of `ApplicationDbContext` (`db`) as a parameter. Inside the constructor, assign the provided `db` parameter to the private `_db` field.
+
+5. **Public Property**:
+   - Declare a public property `Category` of type `Category`. This property represents the category to be created.
+
+6. **OnGet Method**:
+   - Define an empty `OnGet` method. This method is invoked when the page is requested using the HTTP GET method. In this case, it does not perform any specific logic.
+
+7. **OnPost Method**:
+   - Define an `OnPost` method. This method is invoked when the page receives a form submission using the HTTP POST method.
+   - Inside the `OnPost` method, add the `Category` object to the `_db.Categories` DbSet to insert it into the database.
+   - Call `_db.SaveChanges()` to persist changes to the database.
+   - Return a `RedirectToPage` result, redirecting the user to the "Index" page within the same folder.
+
+8. **Conclusion**:
+   - This PageModel class handles the creation of a new category. It receives the category data from a form submission, adds it to the database, and then redirects the user to the "Index" page.
+  
+the code of create.cshtmt is:
+```
+@page
+@model BulkyWebRazor_Temp.Pages.Categories.CreateModel
+
+<form method="post">
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Category</h2>
+            <hr/>
+        </div>
+        @*<div asp-validation-summary="ModelOnly"></div>*@
+       <div class="mb-3 row p-1">
+            <label asp-for="Category.Name"  class="p-0"></label>
+            <input asp-for="Category.Name" class="form-control" />
+            <span asp-validation-for="Category.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Category.DisplayOrder" class="p-0"></label>
+            <input asp-for="Category.DisplayOrder" class="form-control" />
+            <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control" >Create</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-page="/Categories/index" class="btn btn-secondary border  form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+        
+       
+    </div>
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}
+```
