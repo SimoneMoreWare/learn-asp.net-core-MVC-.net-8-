@@ -41,6 +41,7 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
     * [Add Validation](#Add-Validation)
     * [Edit Entry](#Edit-Entry)
     * [Delete Entry](#Delete-Entry)
+    * [Display Notification on update/delete/create event](#Display-Notification-on-update/delete/create-event)
 * [Design](#Design)
 * MVC Application
 * Client and Server Validation
@@ -733,7 +734,112 @@ Functions Used:
 
 ### Delete Entry
 
-You should create a new method action called "Delete"
+You should create a new method action called "Delete". However, you should create a view delete page.
+
+There are two methods of action:
+```
+public IActionResult Delete(int? id)
+{
+    if (id == null || id == 0)
+    {
+        return NotFound();
+    }
+    Category? categoryFromDb = _db.Categories.Find(id);
+    //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+
+    if (categoryFromDb == null)
+    {
+        return NotFound();
+    }
+    return View(categoryFromDb);
+}
+[HttpPost, ActionName("Delete")]
+public IActionResult DeletePOST(int? id)
+{
+
+    Category obj = _db.Categories.Find(id);
+
+    if (obj == null)
+    {
+        return NotFound();
+    }
+
+    _db.Categories.Remove(obj);
+    _db.SaveChanges();
+    return RedirectToAction("Index");
+
+}
+```
+`public IActionResult Delete(int? id)`
+1. The method `Delete` is an HTTP GET action method, which handles requests to display a form to delete a category.
+2. It takes an optional parameter `id`, representing the ID of the category to be deleted.
+3. Checks if the `id` is null or zero. If so, it returns a "NotFound" result, indicating that the category was not found.
+4. Retrieves the category with the specified `id` from the database using the `Find` method.
+5. If the category is not found (`categoryFromDb` is null), it returns a "NotFound" result.
+6. Otherwise, it returns a view to display the details of the category to be deleted.
+7. In index.cshtml used asp-route-id to pass the parameter id.
+    - asp-route-id="@obj.Id"
+    - In an ASP.NET Core MVC application, `asp-route-id="@obj.Id"` is used to generate a URL with a route parameter called "id", whose value will be taken from the "Id" property of the `obj` object.
+    - When a link is generated using `asp-route`, it creates a URL that includes the specified route parameters. In your case, `asp-route-id="@obj.Id"` means that a URL will be generated with a route parameter called "id" whose value will be the ID of the `obj` object.
+    - For example, if `obj.Id` is 1, the generated URL will be something like this:
+        - /ControllerName/ActionName?id=1
+        - This URL will be used to call a specific action in the controller with the ID as a parameter. This is useful when you want to pass data between different actions or pages within the application.
+
+`[HttpPost, ActionName("Delete")] public IActionResult DeletePOST(int? id)`
+1. The method `DeletePOST` is an HTTP POST action method, which handles form submissions to delete a category.
+2. It takes an optional parameter `id`, representing the ID of the category to be deleted.
+3. Retrieves the category with the specified `id` from the database using the `Find` method and assigns it to the `obj` variable.
+4. Checks if the `obj` is null. If so, it returns a "NotFound" result, indicating that the category was not found.
+5. Removes the `obj` from the database using the `Remove` method of the database context (`_db`).
+6. Calls `SaveChanges` to persist the changes to the database.
+7. Redirects the user to the "Index" action of the controller, typically representing the list of categories.
+
+Functions Used:
+- `Find(int? id)`: Searches for an entity in the current entity set using the specified primary key. Returns the found entity or null if not found.
+- `Remove(obj)`: Marks the specified entity for deletion. The entity will be deleted from the database when `SaveChanges` is called.
+- `SaveChanges()`: Persists all changes made to entities in the database context to the underlying database.
+- `NotFound()`: Returns an HTTP "404 Not Found" result. This method is often used to indicate that a requested resource was not found on the server.
+
+In the delete view page used `<input asp-for="Id" hidden />` that generates a hidden input field for the "Id" property of the model associated with the view. This can be useful for passing values between the client and server without displaying them to the user. The value of the "Id" property will be sent along with other form data when the form is submitted, but it won't be visible to the user in the browser.
+This can be particularly helpful in scenarios like form submissions where you need to send the ID of an entity to the server without exposing it to the user.
+
+### Display Notification on update/delete/create event
+
+Create custom css toastr: https://codeseven.github.io/toastr/demo.html
+
+For this scope, there is TempData
+
+In ASP.NET Core MVC, TempData is a feature that allows us to store temporary data that will be available for the next request. It’s a mechanism to pass data between different actions or controllers during the lifetime of a user’s session. TempData is typically used when you want to show a message or provide some information to the user after a redirect.
+
+TempData is implemented using the session state. It stores data in the session between requests, but unlike regular session data, TempData is meant to be short-lived and is removed automatically once read or after the subsequent request is processed.
+
+The TempData in ASP.NET Core MVC Application is one of the mechanisms to pass a small amount of temporary data from a controller action method to a view and from a controller action method to another action method within the same controller or to a different controller. TempData value will become null once the subsequent request is completed by default. But if you want, then you can also change this default behavior. If you look at the definition Controller class, you will find the following signature of the TempData property.
+
+Once TempData data is read, it's automatically marked for deletion. This means TempData data will be available only for the subsequent request and will be deleted after being read. This behavior is useful for passing temporary information, such as confirmation messages or errors, between actions.
+
+TempData is often used to pass feedback messages, such as success messages or errors, between actions. For example, after completing a save operation, you can store a success message in TempData and then redirect the user to a display page with the success message displayed. Alternatively, in case of errors, you can store an error message in TempData and redirect the user to the previous page with the error message displayed.
+
+In this case, use the partial view, here is the code:
+```
+@if (TempData["success"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["success"]');
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.success('@TempData["error"]');
+    </script>
+}
+```
+
 
 ## Design
 Tool: (https://bootswatch.com/)[https://bootswatch.com/]
