@@ -1149,3 +1149,4 @@ the code of create.cshtmt is:
     }
 }
 ```
+The approach of editing, and deleting pages is the same. This is an assignment.
