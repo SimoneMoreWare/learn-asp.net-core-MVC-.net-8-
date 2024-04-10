@@ -21,13 +21,13 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * [Prerequisites](#Prerequisites)
 * [Tools Needed](#Tools-Needed)
 * [Welcome project](#Welcome-project)
-    * [Create a project and execute it](#Create-a-project-and execute-it)
-    * [file with .csproj exstension](#file-with-.csproj exstension)
+    * [Create a project and execute it](#Create-a-project-and-execute-it)
+    * [file with .csproj exstension](#file-with-.csproj-exstension)
     * [launchSettings.json](#launchSettings.json)
     * [wwwroot folder](#wwwroot-folder)
     * [appsettings.json](#appsettings.json)
     * [program.cs](#program.cs)
-    * [Controllers, Models, and Views folder](#Controllers, Models,-and-Views-folder)
+    * [Controllers, Models, and Views folder](#Controllers,-Models,-and-Views-folder)
     * [HomeController.cs](#HomeController.cs)
     * [How to display the footer and the menu on the index page?](#How-to-display-the-footer-and-the-menu-on-the-index-page?)
 * [MVC Architecture](#MVC-Architecture)
@@ -39,6 +39,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
     * [How to display the entries table on a page](#How-to-display-the-entries-table-on-a-page)
     * [Add category with button](#Add-category-with-button)
     * [Add Validation](#Add-Validation)
+    * [Edit Entry](#Edit-Entry)
+    * [Delete Entry](#Delete-Entry)
 * [Design](#Design)
 * MVC Application
 * Client and Server Validation
@@ -664,6 +666,14 @@ There are only three valid values for the asp-validation-summary attribute in AS
 * "All": Displays a summary of all validation errors, including errors associated with individual properties as well as errors associated with the model as a whole.
 * "ModelOnly": Displays a summary of errors associated with the model as a whole, excluding errors associated with individual properties.
 * "None": Specifies that no validation summary should be displayed. It essentially disables the validation summary feature.
+
+### Edit Entry
+
+You should create a new method action called "Edit"
+
+### Delete Entry
+
+You should create a new method action called "Delete"
 
 ## Design
 Tool: (https://bootswatch.com/)[https://bootswatch.com/]
