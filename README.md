@@ -47,6 +47,8 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
     * [Pages folder](#Pages-folder)
     * [Configure Entity Framework Core](#Configure-Entity-Framework-Core)
 * [N-tier architecture](#N-tier-architecture)
+     * [First steps](#First-steps)
+     *   
 * [Utilities](#Utilities)
 ## Fundamentals of ASP.NET Core 
 * Fast
