@@ -33,6 +33,7 @@ My notes about asp.net core MVC [.net 8]
     * [How to display the footer and the menu on the index page?](#How-to-display-the-footer-and-the-menu-on-the-index-page?)
 * [MVC Architecture](#MVC-Architecture)
 * [Routing](#Routing)
+* [Section](#Section)
 * [HomeController.cs](#HomeController.cs)
 * [Database](#Database)
     * [Create a table](#Create-a-table)
@@ -325,6 +326,34 @@ The MVC architecture is divided into three parts:
 
 ## Routing
 The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
+
+## Section
+
+Sections in ASP.NET Core MVC are a feature that allows you to define specific areas within a layout file that can be filled with content from pages that use that layout. This is useful when you want to maintain the general structure of the layout but insert dynamic content into various sections.
+
+In the layout file (typically named _Layout.cshtml), you can define sections using the @section tag. For example:
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] - My ASP.NET Application</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to my website!</h1>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p>Copyright © 2024 - My Website</p>
+        @RenderSection("Footer", required: false)
+    </footer>
+</body>
+</html>
+```
 
 ## Database
 You follow prerequisite instructions before starting with this. 
