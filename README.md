@@ -1163,6 +1163,11 @@ N-tier architecture, in ASP.NET Core MVC .NET 8 environment, refers to a mode of
 
 Using an N-tier architecture offers several advantages, including greater modularity, maintainability, scalability, and testability of the software. Additionally, by separating various aspects of the application into distinct layers, it becomes easier for developers to manage complexities and make changes without impacting other components of the system.
 
+Example of project: 
+* (https://github.com/aghayeffemin/aspnetcore.ntier)[https://github.com/aghayeffemin/aspnetcore.ntier]
+* (https://github.com/nuyonu/N-Tier-Architecture)[https://github.com/nuyonu/N-Tier-Architecture]
+* (https://www.youtube.com/watch?v=_-PnZ37kSLA)[https://www.youtube.com/watch?v=_-PnZ37kSLA]
+
 ## Utilities
 * https://bootswatch.com/
 * https://icons.getbootstrap.com/
