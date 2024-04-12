@@ -355,6 +355,14 @@ In the layout file (typically named _Layout.cshtml), you can define sections usi
 </html>
 ```
 
+Meanwhile, in the view folder, you create a custom section like this:
+```
+@section Footer {
+    <p>This is the footer content for this page.</p>
+}
+
+```
+
 ## Database
 You follow prerequisite instructions before starting with this. 
 
