@@ -1359,8 +1359,8 @@ By implementing the repository pattern, you can easily add new functionality to 
 * https://www.learnprompt.org/chat-gpt-prompts-for-learning/
 
 ## Exercise
-* (Custom Identity in Asp.Net Core MVC | Login and User Registration | .Net 8
-)[https://www.youtube.com/watch?v=93ssXlCPcuI]
-* (ecommerce-books-store)[https://github.com/itsyst/ecommerce-books-store]
-* (GuitarCenterWeb)[https://github.com/KrystianMroczkowski/GuitarCenterWeb]
-* (The Bookstore Management Web Application)[https://github.com/supun-chamika/BookStore-Management-Web-App-using-ASP.NET-Core-MVC-.NET-8-]
+* [Custom Identity in Asp.Net Core MVC | Login and User Registration | .Net 8
+](https://www.youtube.com/watch?v=93ssXlCPcuI)
+* [ecommerce-books-store](https://github.com/itsyst/ecommerce-books-store)
+* [GuitarCenterWeb](https://github.com/KrystianMroczkowski/GuitarCenterWeb)
+* [The Bookstore Management Web Application](https://github.com/supun-chamika/BookStore-Management-Web-App-using-ASP.NET-Core-MVC-.NET-8-)
