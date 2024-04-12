@@ -2,7 +2,8 @@
 My notes about asp.net core MVC [.net 8]
 
 # Video Course
-https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
+* https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
+* https://www.youtube.com/watch?v=BzlPrVB_DwA
 
 # Microsoft Official Guide
 * https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
@@ -47,9 +48,9 @@ https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
     * [Pages folder](#Pages-folder)
     * [Configure Entity Framework Core](#Configure-Entity-Framework-Core)
 * [N-tier architecture](#N-tier-architecture)
-     * [First steps](#First-steps)
-     *   
+* [Repository Pattern](#Repository-Pattern)
 * [Utilities](#Utilities)
+* [Exercise](#Exercise)
 ## Fundamentals of ASP.NET Core 
 * Fast
 * Open Source
@@ -320,6 +321,7 @@ The MVC architecture is divided into three parts:
   * It has many action methods. These methods define the endpoints in a controller
 
 ![imageMVCArchitecture](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/MVCarchitecture.png)
+![imageMVCArchitecture2](https://github.com/SimoneMoreWare/learn-asp.net-core-MVC-.net-8-/blob/main/img/MVCarchitecture2.png)
 
 ## Routing
 The URL pattern for routing is considered after the domain name. For example of URL is 'https://localhost:55555/{controller}/{action}/{id}
@@ -1187,6 +1189,41 @@ Example of project:
 * (https://github.com/nuyonu/N-Tier-Architecture)[https://github.com/nuyonu/N-Tier-Architecture]
 * (https://www.youtube.com/watch?v=_-PnZ37kSLA)[https://www.youtube.com/watch?v=_-PnZ37kSLA]
 
+## Repository Pattern
+
+Welcome to this tutorial on the Repository Design Pattern in C# and ASP.NET Core MVC applications. In this video, we will explore how to implement the repository design pattern to improve the structure and maintainability of your code.
+
+The Problem with Traditional Approach
+
+If you have ever created a C# ASP.NET MVC application, you may be familiar with the traditional approach of organizing your code. Typically, you would have a controller for each model in your application, such as a product controller for managing products.
+In this traditional approach, all the CRUD (create, read, update, delete) operations for the product model would be placed inside the product controller. This may work fine for small applications, but as the application grows and new functionality is added, it can lead to code duplication and maintenance issues.
+
+The Repository Design Pattern
+
+The repository design pattern provides a solution to the problems mentioned above. It introduces an additional layer between the controller and the data access logic. Instead of directly accessing the database context from the controller, the controller communicates with a product repository, which in turn communicates with the context.
+This separation of concerns allows for better code organization, easier maintenance, and the ability to reuse the repository in other controllers if needed. It also reduces the risk of duplicating code when adding new functionality.
+
+Implementing the Repository Pattern
+
+To implement the repository pattern, we need to create an interface and a class for the product repository.
+In your project, create a folder called "Repositories" to hold your repository classes. Inside this folder, create an interface called "IProductRepository". This interface will define the contract for the product repository.
+The "IProductRepository" interface should include methods for CRUD operations, such as "GetAll", "GetById", "Insert", "Update", and "Delete". These methods will be implemented in the product repository class.
+Next, create a class called "ProductRepository" inside the "Repositories" folder. This class should implement the "IProductRepository" interface.
+In the "ProductRepository" class, you will need to inject the database context using dependency injection. This can be done by adding a constructor that takes an instance of the context.
+Inside the constructor, assign the context to a private readonly field. This field will be used to perform data access operations.
+Now, you can move the code from the product controller to the product repository class. For example, the "GetAll" method in the repository class will query the context to retrieve all products, while the "Insert" method will create a new product in the database.
+Finally, in the product controller, you can replace the direct access to the context with calls to the product repository methods. For example, to get all products, you can call the "GetAll" method on the product repository instead of querying the context directly.
+By implementing the repository pattern, you have decoupled the controller from the data access logic and improved the maintainability of your code.
+
+Conclusion
+
+The repository design pattern is a powerful technique that can greatly improve the structure and maintainability of your C# and ASP.NET Core MVC applications. By separating the data access logic into a separate layer, you can reduce code duplication, improve code organization, and facilitate code reuse.
+By implementing the repository pattern, you can easily add new functionality to your application without having to modify the controller code. This can lead to more maintainable and scalable applications.
+
 ## Utilities
 * https://bootswatch.com/
 * https://icons.getbootstrap.com/
+
+## Exercise
+* (Custom Identity in Asp.Net Core MVC | Login and User Registration | .Net 8
+)[https://www.youtube.com/watch?v=93ssXlCPcuI]
