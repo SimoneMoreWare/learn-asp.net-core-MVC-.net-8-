@@ -12,6 +12,7 @@ My notes about asp.net core MVC [.net 8]
 # Sites
 * https://dotnettutorials.net/lesson/viewimports-in-asp-net-core-mvc/#google_vignette
 * https://www.tutorialsteacher.com/core/aspnet-core-program
+* https://www.c-sharpcorner.com/article/full-stack-web-development-in-asp-net-core-8-mvc/
 
 # Project Resources
 * https://github.com/bhrugen/Bulky_MVC/tree/15a896555835fae1482fb1536e549dc132c92249
