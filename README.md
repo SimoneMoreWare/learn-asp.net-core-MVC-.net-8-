@@ -58,6 +58,7 @@ My notes about asp.net core MVC [.net 8]
     * [Conclusion](#Conclusion)
 * [Utilities](#Utilities)
 * [Exercise](#Exercise)
+* [Publish your webApp on Azure](#Publish-your-webApp-on-Azure)
 ## Fundamentals of ASP.NET Core 
 * Fast
 * Open Source
@@ -1365,3 +1366,6 @@ By implementing the repository pattern, you can easily add new functionality to 
 * [ecommerce-books-store](https://github.com/itsyst/ecommerce-books-store)
 * [GuitarCenterWeb](https://github.com/KrystianMroczkowski/GuitarCenterWeb)
 * [The Bookstore Management Web Application](https://github.com/supun-chamika/BookStore-Management-Web-App-using-ASP.NET-Core-MVC-.NET-8-)
+
+## Publish your webApp on Azure
+https://www.youtube.com/watch?v=TcghUb1NPCw
