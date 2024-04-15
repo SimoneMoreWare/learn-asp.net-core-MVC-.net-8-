@@ -4,6 +4,7 @@ My notes about asp.net core MVC [.net 8]
 # Video Course
 * https://www.youtube.com/watch?v=AopeJjkcRvU&t=909s
 * https://www.youtube.com/watch?v=BzlPrVB_DwA
+* https://www.youtube.com/watch?v=BzlPrVB_DwA&t=5177s
 
 # Microsoft Official Guide
 * https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-8.0&tabs=visual-studio
