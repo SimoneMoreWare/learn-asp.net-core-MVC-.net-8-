@@ -56,6 +56,7 @@ My notes about asp.net core MVC [.net 8]
     * [Implementation in ASP.NET Core MVC (.NET 8)](#Implementation-in-ASP.NET-Core-MVC-(.NET-8))
     * [Best Practices and Considerations](#Best-Practices-and-Considerations)
     * [Conclusion](#Conclusion)
+* [Identity](#Identity)
 * [Utilities](#Utilities)
 * [Exercise](#Exercise)
 * [Publish your webApp on Azure](#Publish-your-webApp-on-Azure)
@@ -1353,6 +1354,9 @@ Conclusion
 
 The repository design pattern is a powerful technique that can greatly improve the structure and maintainability of your C# and ASP.NET Core MVC applications. By separating the data access logic into a separate layer, you can reduce code duplication, improve code organization, and facilitate code reuse.
 By implementing the repository pattern, you can easily add new functionality to your application without having to modify the controller code. This can lead to more maintainable and scalable applications.
+
+## Identity
+To complete... (also for home page)
 
 ## Utilities
 * https://bootswatch.com/
