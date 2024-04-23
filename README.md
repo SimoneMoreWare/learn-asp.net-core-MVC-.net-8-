@@ -1365,6 +1365,7 @@ To complete... (also for home page)
 * To receive a good description of the topic you can use this prompt: "Could I receive a comprehensive treatment on the topic [nameTopic], including all relevant details and information?"
 * https://www.learnprompt.org/chat-gpt-prompts-for-learning/
 * https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md
+* https://github.com/SimoneMoreWare/Learn_SignalR/tree/main
 
 ## Exercise
 * [Custom Identity in Asp.Net Core MVC | Login and User Registration | .Net 8
